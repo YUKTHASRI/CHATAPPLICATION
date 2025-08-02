@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join Room - GreenChat</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .form-container {
+      max-width: 500px;
+      margin: 80px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h2 { color: #1e5631; margin-bottom: 20px; }
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #b2d8b2;
+      font-size: 16px;
+    }
+    button {
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover { background-color: #388e3c; }
+  </style>
+</head>
+<body style="background: linear-gradient(to right, #eafaf1, #d4f7dc);">
+  <div class="form-container">
+    <h2>Join an Existing Room</h2>
+    <form action="chat.html" method="get">
+      <input type="text" name="username" placeholder="Enter your username" required />
+      <input type="text" name="room" placeholder="Enter room name" required />
+      <input type="password" name="password" placeholder="Enter room password" required />
+      <button type="submit">Join Chat Room</button>
+    </form>
+  </div>
+</body>
+</html>

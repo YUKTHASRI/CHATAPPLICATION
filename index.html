@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GreenChat - Home</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .home-container {
+      max-width: 600px;
+      margin: 80px auto;
+      text-align: center;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      color: #2c3e50;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .action-btn {
+      padding: 12px;
+      background: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      text-decoration: none;
+    }
+
+    .action-btn:hover {
+      background: #388e3c;
+    }
+  </style>
+</head>
+<body style="background: #eafbe7;">
+  <div class="home-container">
+    <h1>Welcome to GreenChat 🌿</h1>
+    <p>Connect with your friends instantly, securely, and simply.</p>
+    <div class="button-group">
+      <a href="create-room.html" class="action-btn">Create a Room</a>
+      <a href="join-room.html" class="action-btn">Join Existing Room</a>
+    </div>
+  </div>
+</body>
+</html>

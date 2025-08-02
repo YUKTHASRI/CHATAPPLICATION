@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GreenChat - Chat Room</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="chat-container">
+    <h2 id="room-name">Room: ...</h2>
+    <div id="messages"></div>
+    <input type="text" id="message-input" placeholder="Type a message..." onkeydown="handleKey(event)" />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const username = urlParams.get('username');
+    const room = urlParams.get('room');
+    const password = urlParams.get('password');
+
+    if (!username || !room || !password) {
+      alert("Username, room and password are required.");
+      window.location.href = "index.html";
+    }
+
+    document.getElementById("room-name").textContent = "Room: " + room;
+    const socket = new WebSocket("ws://localhost:3000");
+
+    socket.onopen = () => {
+      socket.send(JSON.stringify({
+        type: "join",
+        username,
+        room,
+        password
+      }));
+    };
+
+    socket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+
+      if (data.type === "message") {
+        addMessage(data);
+      }
+
+      if (data.type === "history") {
+        data.messages.forEach(msg => addMessage(msg));
+      }
+
+      if (data.type === "error") {
+        alert(data.message);
+        window.location.href = "index.html";
+      }
+    };
+
+    function sendMessage() {
+      const input = document.getElementById("message-input");
+      const content = input.value.trim();
+      if (!content) return;
+
+      socket.send(JSON.stringify({
+        type: "message",
+        username,
+        room,
+        content,
+        timestamp: new Date().toLocaleTimeString(),
+      }));
+      input.value = "";
+    }
+
+    function handleKey(event) {
+      if (event.key === "Enter") sendMessage();
+    }
+
+    function addMessage({ username, content, timestamp }) {
+      const messages = document.getElementById("messages");
+      const div = document.createElement("div");
+      div.className = "message";
+      div.innerHTML = `<strong>${username}</strong> <em>${timestamp}</em>: ${content}`;
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+    }
+  </script>
+</body>
+</html>
